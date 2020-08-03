@@ -28,6 +28,10 @@ app.get('/tracks', (req, res) => {
 //GET track by id
 app.get('/tracks/:id', (req, res) => {
     const trackById = data["tracks"].data.find((t) => t.id === parseInt(req.params.id));
+    if (!trackById) {
+        res.status(404).send(`Track with id: ${req.params.id} not found.`);
+        return;
+    }
     res.json(trackById);
 
 });
